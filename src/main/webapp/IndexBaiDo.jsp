@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%int ID = 1;%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,35 +33,29 @@
 			<table>
 				<thead>
 					<tr>
-						<th>Biển số</th>
-						<th>Thời gian vào bãi</th>
-						<th>Thời gian ra bãi</th>
-						<th>Số tiền phải thanh toán</th>
+						<th></th>
+						<th>Tên bãi đỗ</th>
+						<th>Địa chỉ</th>
+						<th>Số điện thoại</th>
+						<th>Sức chứa</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>51G-12345</td>
-						<td>2022-03-16 10:30:00</td>
-						<td>2022-03-16 16:45:00</td>
-						<td>100,000 đồng</td>
-					</tr>
-					<tr>
-						<td>51G-54321</td>
-						<td>2022-03-16 11:15:00</td>
-						<td>2022-03-16 19:30:00</td>
-						<td>150,000 đồng</td>
-					</tr>
-					<tr>
-						<td>51G-67890</td>
-						<td>2022-03-16 14:30:00</td>
-						<td>2022-03-16 21:45:00</td>
-						<td>200,000 đồng</td>
-					</tr>
+					<c:forEach var="l" items="${lst}">
+						<tr>
+							<td><%= ID%><%ID++;%></td>
+							<td>${l.namePlot}</td>
+							<td>${l.addRess}</td>
+							<td>${l.teLephone}</td>
+							<td>${l.caPacity}</td>
+							<td><a href="EditBaiDo.jsp?id=${l.id}">Edit</a></td>
+							<td><a href="DeleteBaiDo?id=${l.id}">Delete</a></td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 			<div class="add">
-				<button><a href="AddXe.jsp">Thêm xe</a></button>
+				<button><a href="AddBaiDo.jsp">Thêm xe</a></button>
 			</div>
 		</section>
 	</main>

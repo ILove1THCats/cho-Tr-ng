@@ -14,7 +14,7 @@
 		<nav>
 			<ul>
 				<li><a href="index.jsp">Trang chủ</a></li>
-				<li><a href="IndexBaiDo.jsp">Bãi đỗ</a></li>
+				<li><a href="IndexBaiDo">Bãi đỗ</a></li>
 				<li><a href="IndexNhanVien">Nhân viên</a></li>
 				<li><a href="IndexThongke.jsp">Thống kê</a></li>
 				<li><a href="LogIn.jsp">Đăng nhập</a></li>

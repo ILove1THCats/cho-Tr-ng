@@ -15,40 +15,36 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class IndexNhanVien
+ * Servlet implementation class IndexBaiDo
  */
-@WebServlet("/IndexNhanVien")
-public class IndexNhanVien extends HttpServlet {
+@WebServlet("/IndexBaiDo")
+public class IndexBaiDo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public IndexBaiDo() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
-	 * @see HttpServlet#HttpServlet()
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public IndexNhanVien() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		
 		Connection conn = null;
 		
-		List<nhanVien> list = new ArrayList<nhanVien>();
+		List<baiDo> list = new ArrayList<baiDo>();
 
 		try {
 			conn = MySQLConntUtils.getMySQLConnection();
 
-			list = DBUtils.Allnhanvien(conn);
+			list = DBUtils.Allbaido(conn);
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			Logger.getLogger(SignInServlet.class.getName()).log(Level.SEVERE, null, e);
@@ -64,17 +60,15 @@ public class IndexNhanVien extends HttpServlet {
 		}
 		
 		request.setAttribute("lst", list);
-		request.getRequestDispatcher("/IndexNhanVien.jsp").forward(request, response);
+		request.getRequestDispatcher("/IndexBaiDo.jsp").forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		doGet(request, response);
+		doGet(request, response);
 	}
 
 }

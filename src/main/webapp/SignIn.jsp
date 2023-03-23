@@ -12,7 +12,6 @@
 		<section>
 			<h2>Đăng ký</h2>
 			<form method="POST" action="SignInServlet">
-			<form>
 				<label for="username">Tên đăng nhập</label>
 				<input type="text" id="username" name="username" placeholder="Nhập tên đăng nhập...">
 				<label for="username">Email</label>

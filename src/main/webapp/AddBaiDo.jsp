@@ -10,7 +10,7 @@
 <body>
 		<section>
 			<h1>Thêm bãi đỗ xe mới</h1>
-			<form>
+			<form method="Post" action = "CreateBaiDo">
 				<label for="name">Tên bãi đỗ xe:</label><br>
 				<input type="text" id="name" name="name"><br>
 		
@@ -18,7 +18,7 @@
 				<input type="text" id="address" name="address"><br>
 		
 				<label for="phone">Số điện thoại:</label><br>
-				<input type="tel" id="phone" name="phone" pattern="[0-9]{10}"><br>
+				<input type="tel" id="phone" name="phone"><br>
 		
 				<label for="capacity">Sức chứa:</label><br>
 				<input type="number" id="capacity" name="capacity" min="1" max="1000"><br>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%int ID = 1;%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,27 +23,26 @@
 		</nav>
 	</header>
 	<main>
-	<h1>${lst}</h1>
 		<section>
 			<h2>Nhân Viên</h2>
 			<table>
 				<thead>
 					<tr>
-						<th>ID</th>
+						<th></th>
 						<th>Name</th>
 						<th>Email</th>
 						<th>Role</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items= ${lst} var="l">
+					<c:forEach var="l" items="${lst}">
 						<tr>
-							<td></td>
+							<td><%= ID%><%ID++;%></td>
 							<td>${l.name}</td>
 							<td>${l.email}</td>
 							<td>${l.role}</td>
-							<td><a href="editnhanvien?code=${l.id}">Edit</a></td>
-							<td><a href="deletenhanvien?code=${l.id}">Delete</a></td>
+							<td><a href="EditNhanVien.jsp?id=${l.id}">Edit</a></td>
+							<td><a href="DeleteNhanVien?id=${l.id}">Delete</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

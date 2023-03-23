@@ -3,8 +3,6 @@ package Servlet;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,16 +13,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class IndexNhanVien
+ * Servlet implementation class EditNhanVienServlet
  */
-@WebServlet("/IndexNhanVien")
-public class IndexNhanVien extends HttpServlet {
+@WebServlet("/EditNhanVienServlet")
+public class EditNhanVienServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public IndexNhanVien() {
+	public EditNhanVienServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -36,35 +34,8 @@ public class IndexNhanVien extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 
-		request.setCharacterEncoding("utf-8");
-		response.setCharacterEncoding("utf-8");
-		
-		Connection conn = null;
-		
-		List<nhanVien> list = new ArrayList<nhanVien>();
-
-		try {
-			conn = MySQLConntUtils.getMySQLConnection();
-
-			list = DBUtils.Allnhanvien(conn);
-		} catch (ClassNotFoundException | SQLException e) {
-			// TODO Auto-generated catch block
-			Logger.getLogger(SignInServlet.class.getName()).log(Level.SEVERE, null, e);
-		}finally {
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException ex) {
-					Logger.getLogger(SignInServlet.class.getName()).log(Level.SEVERE, null, ex);
-				}
-			}
-
-		}
-		
-		request.setAttribute("lst", list);
-		request.getRequestDispatcher("/IndexNhanVien.jsp").forward(request, response);
 	}
 
 	/**
@@ -75,6 +46,35 @@ public class IndexNhanVien extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		doGet(request, response);
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		Connection conn = null;
+		try {
+			conn = MySQLConntUtils.getMySQLConnection();
+
+			int id = Integer.parseInt(request.getParameter("id"));
+			String name = request.getParameter("name");
+			String email = request.getParameter("email");
+			String role = request.getParameter("role");
+
+			nhanVien nhanvien = new nhanVien(id, name, email, role);
+
+			DBUtils.EditNhanV(conn, nhanvien);
+
+			String contextPath = request.getContextPath();
+			response.sendRedirect(contextPath + "/IndexNhanVien");
+		} catch (SQLException | ClassNotFoundException ex) {
+			Logger.getLogger(SignInServlet.class.getName()).log(Level.SEVERE, null, ex);
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException ex) {
+					Logger.getLogger(SignInServlet.class.getName()).log(Level.SEVERE, null, ex);
+				}
+			}
+
+		}
 	}
 
 }

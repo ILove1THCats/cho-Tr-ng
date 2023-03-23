@@ -11,6 +11,11 @@ public class nhanVien {
 		super();
 	}
 
+	public nhanVien(int id) {
+		super();
+		Id = id;
+	}
+
 	public nhanVien(String name, String password) {
 		super();
 		Name = name;
