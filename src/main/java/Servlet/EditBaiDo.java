@@ -18,27 +18,51 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/EditBaiDo")
 public class EditBaiDo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public EditBaiDo() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	public EditBaiDo() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		String errorString = null;
+		String id = request.getParameter("id");
+		baiDo bai = new baiDo();
+		try {
+
+			Connection conn = MySQLConntUtils.getMySQLConnection();
+			bai = DBUtils.findBD(conn, id);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		request.setAttribute("errorString", errorString);
+		request.setAttribute("bai", bai);
+		request.getRequestDispatcher("/EditBaiDo.jsp").forward(request, response);
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		doGet(request, response);
 		request.setCharacterEncoding("utf-8");
@@ -53,7 +77,7 @@ public class EditBaiDo extends HttpServlet {
 			String telephone = request.getParameter("telephone");
 			String capacity = request.getParameter("capacity");
 
-			baiDo baid = new baiDo(id ,name, address, telephone, capacity);
+			baiDo baid = new baiDo(id, name, address, telephone, capacity);
 
 			DBUtils.EditBaiD(conn, baid);
 

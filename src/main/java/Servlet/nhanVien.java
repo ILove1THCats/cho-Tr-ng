@@ -1,70 +1,40 @@
 package Servlet;
 
 public class nhanVien {
-	private int Id;
+	private String Id_nhanvien;
 	private String Name;
-	private String Email;
+	private String Phone;
 	private String Role;
-	private String Password;
-	
+	private String Shift;
+
 	public nhanVien() {
-		super();
 	}
 
-	public nhanVien(int id) {
-		super();
-		Id = id;
+	public nhanVien(String id) {
+		Id_nhanvien = id;
 	}
 
-	public nhanVien(String name, String password) {
-		super();
+	public nhanVien(String id, String name, String phone, String role, String shift) {
+		Id_nhanvien = id;
 		Name = name;
-		Password = password;
-	}
-	
-	public nhanVien(String name, String email, String role) {
-		super();
-		Name = name;
-		Email = email;
+		Phone = phone;
 		Role = role;
+		Shift = shift;
 	}
 
-	public nhanVien(String name, String email, String role, String password) {
-		super();
+	public nhanVien(String name, String phone, String role, String shift) {
 		Name = name;
-		Email = email;
+		Phone = phone;
 		Role = role;
-		Password = password;
+		Shift = shift;
 	}
 
-	public nhanVien(int id, String name, String email, String role, String password) {
-		super();
-		Id = id;
-		Name = name;
-		Email = email;
-		Role = role;
-		Password = password;
-	}
-	
-	public nhanVien(int id, String name, String email, String role) {
-		super();
-		Id = id;
-		Name = name;
-		Email = email;
-		Role = role;
+	public String getId_nhanvien() {
+		return Id_nhanvien;
 	}
 
-	public nhanVien(nhanVien nhv) {
-		this.Name = Name;
-		this.Password = Password;
-	}
-
-	public int getId() {
-		return Id;
-	}
-
-	public void setId(int id) {
-		Id = id;
+	public void setId_nhanvien(String id_nhanvien) {
+		Id_nhanvien = id_nhanvien;
 	}
 
 	public String getName() {
@@ -75,12 +45,12 @@ public class nhanVien {
 		Name = name;
 	}
 
-	public String getEmail() {
-		return Email;
+	public String getPhone() {
+		return Phone;
 	}
 
-	public void setEmail(String email) {
-		Email = email;
+	public void setPhone(String phone) {
+		Phone = phone;
 	}
 
 	public String getRole() {
@@ -91,13 +61,11 @@ public class nhanVien {
 		Role = role;
 	}
 
-	public String getPassword() {
-		return Password;
+	public String getShift() {
+		return Shift;
 	}
 
-	public void setPassword(String password) {
-		Password = password;
+	public void setShift(String shift) {
+		Shift = shift;
 	}
-	
-	
 }

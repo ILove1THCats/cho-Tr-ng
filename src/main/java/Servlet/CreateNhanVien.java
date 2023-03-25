@@ -46,12 +46,13 @@ public class CreateNhanVien extends HttpServlet {
 		try {
 			conn = MySQLConntUtils.getMySQLConnection();
 			
+			String id = request.getParameter("id_nhanvien");
 			String name = request.getParameter("name");
-			String email = request.getParameter("address");
+			String email = request.getParameter("phone");
 			String role = request.getParameter("role");
-			String password = request.getParameter("password");
+			String shift = request.getParameter("shift");
 			
-			nhanVien nhanv = new nhanVien(name, email, role, password);
+			nhanVien nhanv = new nhanVien(id, name, email, role, shift);
 			
 			DBUtils.insertNVien(conn, nhanv);
 			

@@ -40,11 +40,41 @@ public class IndexBaiDo extends HttpServlet {
 		Connection conn = null;
 		
 		List<baiDo> list = new ArrayList<baiDo>();
+		int endPage = 0;
+		int pageSize = 3;
+		int index = 0;
+
 
 		try {
 			conn = MySQLConntUtils.getMySQLConnection();
+			String rawSearch = request.getParameter("search");
+			if (rawSearch != null) {
+				
+				list = DBUtils.searchBD(conn, rawSearch);
+				
+				int count = DBUtils.searchBD(conn, rawSearch).size();
+				endPage = count/pageSize;
+				if (count % pageSize != 0) {
+					endPage++;
+				}
+				
+				request.setAttribute("end", endPage);
+				request.setAttribute("lst", list);
+				request.getRequestDispatcher("/IndexNhanVien.jsp").forward(request, response);
+			}
+			String rawIndex = request.getParameter("index");
+			if (rawIndex != null) {
+				index = Integer.parseInt(rawIndex);
+			}
+			
+			list = DBUtils.WrapPageBD(conn, index, pageSize);
 
-			list = DBUtils.Allbaido(conn);
+			int count = DBUtils.countBD(conn);
+			endPage = count/pageSize;
+			if (count % pageSize != 0) {
+				endPage++;
+			}
+
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			Logger.getLogger(SignInServlet.class.getName()).log(Level.SEVERE, null, e);

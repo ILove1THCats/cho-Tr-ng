@@ -34,8 +34,25 @@ public class EditNhanVienServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 
+		String errorString = null;
+		String id = request.getParameter("id");
+		nhanVien nhanv = new nhanVien();
+		try {
+			Connection conn = MySQLConntUtils.getMySQLConnection();
+			nhanv = DBUtils.findNV(conn, id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		request.setAttribute("errorString", errorString);
+		request.setAttribute("nhanvien", nhanv);
+		request.getRequestDispatcher("/EditNhanVien.jsp").forward(request, response);
 	}
 
 	/**
@@ -52,12 +69,13 @@ public class EditNhanVienServlet extends HttpServlet {
 		try {
 			conn = MySQLConntUtils.getMySQLConnection();
 
-			int id = Integer.parseInt(request.getParameter("id"));
+			String id = request.getParameter("id_nhanvien");
 			String name = request.getParameter("name");
-			String email = request.getParameter("email");
+			String email = request.getParameter("phone");
 			String role = request.getParameter("role");
+			String shift = request.getParameter("shift");
 
-			nhanVien nhanvien = new nhanVien(id, name, email, role);
+			nhanVien nhanvien = new nhanVien(id, name, email, role, shift);
 
 			DBUtils.EditNhanV(conn, nhanvien);
 

@@ -8,6 +8,10 @@ public class baiDo {
 	private String teLephone;
 	private String caPacity;
 	
+	public baiDo() {
+		super();
+	}
+
 	public baiDo(int id) {
 		super();
 		this.id = id;

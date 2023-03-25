@@ -51,13 +51,13 @@ public class LogInServlet extends HttpServlet {
 			String password = request.getParameter("password");
 			
 			//Tạo đối tượng csdl
-			nhanVien nv = new nhanVien(username, password);
+			UserAccount us = new UserAccount();
 			//Thêm đối tượng vào csdl
-			nhanVien n = DBUtils.findNV(conn, nv.getName(), nv.getPassword());
+			UserAccount n = DBUtils.findUS(conn, us.getUsername(), us.getPassword());
 			
 			if(n != null) {
 				
-				nhanVien nhanv = new nhanVien(n);
+				UserAccount usr = new UserAccount();
 				request.setAttribute("nhanvien", "Xìn chào! Bạn " + username + " yêu dấu!");
 				request.getRequestDispatcher("/index.jsp").forward(request, response);
 			}else {

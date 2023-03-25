@@ -40,19 +40,48 @@ public class IndexNhanVien extends HttpServlet {
 
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-		
+
 		Connection conn = null;
-		
+
 		List<nhanVien> list = new ArrayList<nhanVien>();
+		int endPage = 0;
+		int pageSize = 3;
+		int index = 0;
 
 		try {
 			conn = MySQLConntUtils.getMySQLConnection();
+			String rawSearch = request.getParameter("search");
+			if (rawSearch != null) {
+				
+				list = DBUtils.searchNV(conn, rawSearch);
+				
+				int count = DBUtils.searchNV(conn, rawSearch).size();
+				endPage = count/pageSize;
+				if (count % pageSize != 0) {
+					endPage++;
+				}
+				
+				request.setAttribute("end", endPage);
+				request.setAttribute("lst", list);
+				request.getRequestDispatcher("/IndexNhanVien.jsp").forward(request, response);
+			}
+			String rawIndex = request.getParameter("index");
+			if (rawIndex != null) {
+				index = Integer.parseInt(rawIndex);
+			}
+			// Phân trang
+			list = DBUtils.WrapPageNV(conn, index, pageSize);
 
-			list = DBUtils.Allnhanvien(conn);
+			int count = DBUtils.countNV(conn);
+			endPage = count/pageSize;
+			if (count % pageSize != 0) {
+				endPage++;
+			}
+
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			Logger.getLogger(SignInServlet.class.getName()).log(Level.SEVERE, null, e);
-		}finally {
+		} finally {
 			if (conn != null) {
 				try {
 					conn.close();
@@ -62,7 +91,8 @@ public class IndexNhanVien extends HttpServlet {
 			}
 
 		}
-		
+
+		request.setAttribute("end", endPage);
 		request.setAttribute("lst", list);
 		request.getRequestDispatcher("/IndexNhanVien.jsp").forward(request, response);
 	}

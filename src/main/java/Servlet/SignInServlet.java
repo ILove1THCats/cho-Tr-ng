@@ -49,15 +49,14 @@ public class SignInServlet extends HttpServlet {
 			
 			//Xử lý thma số từ form
 			String username = request.getParameter("username");
-			String email = request.getParameter("email");
-			String role = request.getParameter("role");
+			String phone = request.getParameter("phone");
 			String password = request.getParameter("password");
 			
 			//Tạo đối tượng user
-			nhanVien nv = new nhanVien(username, email, role, password);
+			UserAccount us = new UserAccount(username, phone, password);
 			
 			//Thêm đối tượng vào cơ sở dữ liệu
-			DBUtils.insertNVien(conn, nv);
+			DBUtils.insertUserAccount(conn, us);
 			request.setAttribute("name", username);
 			request.getRequestDispatcher("/index.jsp").forward(request, response);
 			

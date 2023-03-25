@@ -35,7 +35,7 @@ public class DeleteNhanVien extends HttpServlet {
 		try {
 			Connection conn = MySQLConntUtils.getMySQLConnection();
 			
-			int id = Integer.parseInt(request.getParameter("id"));
+			String id = request.getParameter("id");
 			
 			nhanVien nhanV = new nhanVien(id);
 			
