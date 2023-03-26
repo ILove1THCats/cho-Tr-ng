@@ -89,6 +89,7 @@ public class IndexBaiDo extends HttpServlet {
 
 		}
 		
+		request.setAttribute("end", endPage);
 		request.setAttribute("lst", list);
 		request.getRequestDispatcher("/IndexBaiDo.jsp").forward(request, response);
 	}

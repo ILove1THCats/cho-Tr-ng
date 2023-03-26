@@ -3,6 +3,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
 int ID = 1;
+String fg = request.getParameter("id");
 %>
 <!DOCTYPE html>
 <html>
@@ -56,12 +57,11 @@ int ID = 1;
 								<%
 								ID++;
 								%></td>
-							<td>${l.namePlot}</td>
-							<td>${l.addRess}</td>
-							<td>${l.teLephone}</td>
-							<td>${l.caPacity}</td>
-							<td><a href="EditBaiDo?id=${l.id}">Edit</a></td>
-							<td><a href="DeleteBaiDo?id=${l.id}">Delete</a></td>
+							<td>${l.sea_number}</td>
+							<td>${l.parking_plot_name}</td>
+							<td>${l.phone}</td>
+							<td><a href="EditBaiDo?id= ${l.id}">Edit</a></td>
+							<td><a href="DeleteBaiDo?id= ${l.id}">Delete</a></td>
 						</tr>
 					</c:forEach>
 				</tbody>

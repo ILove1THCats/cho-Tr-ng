@@ -2,70 +2,66 @@ package Servlet;
 
 public class baiDo {
 	
-	private int id;
-	private String namePlot;
-	private String addRess;
-	private String teLephone;
-	private String caPacity;
+	private String id;
+	private String sea_number;
+	private String parking_plot_name;
+	private String phone;
 	
 	public baiDo() {
 		super();
 	}
-
-	public baiDo(int id) {
+	
+	public baiDo(String id) {
 		super();
 		this.id = id;
-	}
-
-	public baiDo(String namePlot, String addRess, String teLephone, String caPacity) {
-		super();
-		this.namePlot = namePlot;
-		this.addRess = addRess;
-		this.teLephone = teLephone;
-		this.caPacity = caPacity;
 	}
 	
-	public baiDo(int id, String namePlot, String addRess, String teLephone, String caPacity) {
+	public baiDo(String sea_number, String parking_plot_name, String phone) {
+		super();
+		this.sea_number = sea_number;
+		this.parking_plot_name = parking_plot_name;
+		this.phone = phone;
+	}
+	
+	public baiDo(String id, String sea_number, String parking_plot_name, String phone) {
 		super();
 		this.id = id;
-		this.namePlot = namePlot;
-		this.addRess = addRess;
-		this.teLephone = teLephone;
-		this.caPacity = caPacity;
+		this.sea_number = sea_number;
+		this.parking_plot_name = parking_plot_name;
+		this.phone = phone;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
+	public String getSea_number() {
+		return sea_number;
+	}
 
-	public String getNamePlot() {
-		return namePlot;
+	public void setSea_number(String sea_number) {
+		this.sea_number = sea_number;
 	}
-	public void setNamePlot(String namePlot) {
-		this.namePlot = namePlot;
+
+	public String getParking_plot_name() {
+		return parking_plot_name;
 	}
-	public String getAddRess() {
-		return addRess;
+
+	public void setParking_plot_name(String parking_plot_name) {
+		this.parking_plot_name = parking_plot_name;
 	}
-	public void setAddRess(String addRess) {
-		this.addRess = addRess;
+
+	public String getPhone() {
+		return phone;
 	}
-	public String getTeLephone() {
-		return teLephone;
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
-	public void setTeLephone(String teLephone) {
-		this.teLephone = teLephone;
-	}
-	public String getCaPacity() {
-		return caPacity;
-	}
-	public void setCaPacity(String caPacity) {
-		this.caPacity = caPacity;
-	}
+	
+	
 }

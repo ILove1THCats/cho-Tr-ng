@@ -37,14 +37,13 @@ public class DBUtils {
 
 	public static void insertBDo(Connection conn, baiDo baid) throws SQLException {
 
-		String sql = "insert into baidoxe(NamePlot, Address, Telephone, Capacity) values (?,?,?,?)";
+		String sql = "insert into baidoxe(sea_number, parking_plot_name, phone) values (?,?,?)";
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
 
-		pstm.setString(1, baid.getNamePlot());
-		pstm.setString(2, baid.getAddRess());
-		pstm.setString(3, baid.getTeLephone());
-		pstm.setString(4, baid.getCaPacity());
+		pstm.setString(1, baid.getSea_number());
+		pstm.setString(2, baid.getParking_plot_name());
+		pstm.setString(3, baid.getPhone());
 
 		pstm.executeUpdate();
 	}
@@ -92,10 +91,9 @@ public class DBUtils {
 		ResultSet rs = pstm.executeQuery();
 		if (rs.next()) {
 			baiDo bai = new baiDo();
-			bai.setNamePlot(rs.getString("NamePlot"));
-			bai.setAddRess(rs.getString("Address"));
-			bai.setTeLephone(rs.getString("Telephone"));
-			bai.setCaPacity(rs.getString("Capacity"));
+			bai.setSea_number(rs.getString("sea_number"));
+			bai.setParking_plot_name(rs.getString("parking_plot_name"));
+			bai.setPhone(rs.getString("phone"));
 			return bai;
 		}
 		return null;
@@ -125,24 +123,22 @@ public class DBUtils {
 	}
 
 	public static List<baiDo> Allbaido(Connection conn) throws SQLException {
-		String sql = "Select * from baidoxe";
+		String sql = "Select id, sea_number, parking_plot_name, phone from baidoxe";
 		PreparedStatement pstm = conn.prepareStatement(sql);
 		ResultSet rs = pstm.executeQuery();
 		List<baiDo> list = new ArrayList<baiDo>();
 
 		while (rs.next()) {
-			Integer id = rs.getInt("Id");
-			String nameplot = rs.getString("NamePlot");
-			String address = rs.getString("Address");
-			String telephone = rs.getString("Telephone");
-			String capacity = rs.getString("Capacity");
+			String id = rs.getString("id");
+			String nameplot = rs.getString("sea_number");
+			String address = rs.getString("parking_plot_name");
+			String telephone = rs.getString("phone");
 
-			baiDo baid = new baiDo(id, nameplot, address, telephone, capacity);
+			baiDo baid = new baiDo(id, nameplot, address, telephone);
 			baid.setId(id);
-			baid.setNamePlot(nameplot);
-			baid.setAddRess(address);
-			baid.setTeLephone(telephone);
-			baid.setCaPacity(capacity);
+			baid.setSea_number(nameplot);
+			baid.setParking_plot_name(address);
+			baid.setPhone(telephone);
 			list.add(baid);
 		}
 		return list;
@@ -163,15 +159,14 @@ public class DBUtils {
 	}
 
 	public static void EditBaiD(Connection conn, baiDo bai) throws SQLException {
-		String sql = "update baidoxe set NamePlot = ?, Address = ?, Telephone = ?, Capacity = ? where Id = ?";
+		String sql = "update baidoxe set sea_number = ?, parking_plot_name = ?, phone = ? where id = ?";
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
 
-		pstm.setString(1, bai.getNamePlot());
-		pstm.setString(2, bai.getAddRess());
-		pstm.setString(3, bai.getTeLephone());
-		pstm.setString(4, bai.getCaPacity());
-		pstm.setInt(5, bai.getId());
+		pstm.setString(1, bai.getSea_number());
+		pstm.setString(2, bai.getParking_plot_name());
+		pstm.setString(3, bai.getPhone());
+		pstm.setString(4, bai.getId());
 
 		pstm.executeUpdate();
 	}
@@ -192,7 +187,7 @@ public class DBUtils {
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
 
-		pstm.setInt(1, baid.getId());
+		pstm.setString(1, baid.getId());
 
 		pstm.executeUpdate();
 	}
@@ -236,18 +231,16 @@ public class DBUtils {
 		List<baiDo> BD = new ArrayList<>();
 
 		while (rs.next()) {
-			Integer id = rs.getInt("Id");
-			String nameplot = rs.getString("NamePlot");
-			String address = rs.getString("Address");
-			String telephone = rs.getString("Telephone");
-			String capacity = rs.getString("Capacity");
+			String id = rs.getString(Integer.parseInt("id"));
+			String nameplot = rs.getString("sea_number");
+			String address = rs.getString("parking_plot_name");
+			String telephone = rs.getString("phone");
 
-			baiDo baid = new baiDo(id, nameplot, address, telephone, capacity);
+			baiDo baid = new baiDo(id, nameplot, address, telephone);
 			baid.setId(id);
-			baid.setNamePlot(nameplot);
-			baid.setAddRess(address);
-			baid.setTeLephone(telephone);
-			baid.setCaPacity(capacity);
+			baid.setSea_number(nameplot);
+			baid.setParking_plot_name(address);
+			baid.setPhone(telephone);
 			BD.add(baid);
 		}
 
@@ -323,21 +316,19 @@ public class DBUtils {
 		pstm.setInt(1, PageStart);
 		pstm.setInt(2, PageIndex);
 		ResultSet rs = pstm.executeQuery();
-		List<baiDo> BD = new ArrayList<>();
+		List<baiDo> BD = new ArrayList<>(); 
 
 		while (rs.next()) {
-			Integer id = rs.getInt("Id");
-			String nameplot = rs.getString("NamePlot");
-			String address = rs.getString("Address");
-			String telephone = rs.getString("Telephone");
-			String capacity = rs.getString("Capacity");
+			String id = rs.getString("id");
+			String nameplot = rs.getString("sea_number");
+			String address = rs.getString("parking_plot_name");
+			String telephone = rs.getString("phone");
 
-			baiDo baid = new baiDo(id, nameplot, address, telephone, capacity);
+			baiDo baid = new baiDo(id, nameplot, address, telephone);
 			baid.setId(id);
-			baid.setNamePlot(nameplot);
-			baid.setAddRess(address);
-			baid.setTeLephone(telephone);
-			baid.setCaPacity(capacity);
+			baid.setSea_number(nameplot);
+			baid.setParking_plot_name(address);
+			baid.setPhone(telephone);
 			BD.add(baid);
 
 		}

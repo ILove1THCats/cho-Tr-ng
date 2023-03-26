@@ -71,13 +71,12 @@ public class EditBaiDo extends HttpServlet {
 		try {
 			conn = MySQLConntUtils.getMySQLConnection();
 
-			int id = Integer.parseInt(request.getParameter("id"));
+			String id = request.getParameter("id");
 			String name = request.getParameter("name");
 			String address = request.getParameter("address");
 			String telephone = request.getParameter("telephone");
-			String capacity = request.getParameter("capacity");
 
-			baiDo baid = new baiDo(id, name, address, telephone, capacity);
+			baiDo baid = new baiDo(id, address, name, telephone);
 
 			DBUtils.EditBaiD(conn, baid);
 

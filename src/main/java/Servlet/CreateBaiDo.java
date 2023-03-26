@@ -54,9 +54,8 @@ public class CreateBaiDo extends HttpServlet {
 			String name = request.getParameter("name");
 			String address = request.getParameter("address");
 			String telephone = request.getParameter("phone");
-			String capacity = request.getParameter("capacity");
 
-			baiDo baid = new baiDo(name, address, telephone, capacity);
+			baiDo baid = new baiDo(name, address, telephone);
 
 			DBUtils.insertBDo(conn, baid);
 
