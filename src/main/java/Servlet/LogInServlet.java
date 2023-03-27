@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class LogInServlet
@@ -57,6 +58,8 @@ public class LogInServlet extends HttpServlet {
 			
 			if(n != null) {
 				
+				HttpSession session = request.getSession();
+				session.setAttribute("username", username);
 				UserAccount usr = new UserAccount();
 				request.setAttribute("nhanvien", "Xin chào! Bạn " + username + " yêu dấu!");
 				request.getRequestDispatcher("/index.jsp").forward(request, response);

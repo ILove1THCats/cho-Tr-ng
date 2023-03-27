@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+  boolean isLoggedIn = session.getAttribute("username") != null;
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +21,13 @@
 				<li><a href="IndexBaiDo?index=0"><i class="fa fa-car"></i> Bãi đỗ</a></li>
 				<li><a href="IndexNhanVien?index=0"><i class="fa fa-users"></i> Nhân viên</a></li>
 				<li><a href="IndexThongke.jsp"><i class="fa fa-map-marker"></i> Địa chỉ</a></li>
-				<li><a href='LogIn.jsp'><i class='fa fa-sign-in'></i> Đăng nhập</a></li>
+				<% if (isLoggedIn) { %>
+				  <li><a href="index.jsp<%session = request.getSession();
+								session.removeAttribute("username");
+								isLoggedIn = false;%>"><i class='fa fa-sign-in'></i> Đăng xuất</a></li>
+				<% } else { %>
+				  <li><a href="LogIn.jsp"><i class='fa fa-sign-in'></i> Đăng nhập</a></li>
+				<% } %>
 			</ul>
 		</nav>
 	</header>
