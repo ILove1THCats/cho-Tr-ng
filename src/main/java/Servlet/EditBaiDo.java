@@ -76,7 +76,7 @@ public class EditBaiDo extends HttpServlet {
 			String address = request.getParameter("address");
 			String telephone = request.getParameter("telephone");
 
-			baiDo baid = new baiDo(id, address, name, telephone);
+			baiDo baid = new baiDo(id, name, address, telephone);
 
 			DBUtils.EditBaiD(conn, baid);
 
