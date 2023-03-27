@@ -51,3 +51,8 @@ button {
 button:hover {
 	background-color: #555;
 }
+
+a {
+	color: #555;
+	text-decoration: none;
+}

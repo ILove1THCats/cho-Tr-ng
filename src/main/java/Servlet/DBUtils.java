@@ -223,7 +223,7 @@ public class DBUtils {
 	
 	public static List<baiDo> searchBD(Connection conn, String name) throws SQLException {
 
-		String sql = "select * from nhanvien where name like ?";
+		String sql = "select * from baidoxe where sea_number like ?";
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
 		pstm.setString(1, "%" + name + "%");
@@ -231,7 +231,7 @@ public class DBUtils {
 		List<baiDo> BD = new ArrayList<>();
 
 		while (rs.next()) {
-			String id = rs.getString(Integer.parseInt("id"));
+			String id = rs.getString("id");
 			String nameplot = rs.getString("sea_number");
 			String address = rs.getString("parking_plot_name");
 			String telephone = rs.getString("phone");

@@ -17,8 +17,7 @@
 				<label for="password">Mật khẩu</label>
 				<input type="password" id="password" name="password" placeholder="Nhập mật khẩu...">
 				<button type="submit">Đăng nhập</button>
-				<label><i>Hmm...Chưa có tài khoản à?</i></label>
-				<a href="SignIn.jsp">Đăng kí tại đây</a>
+				<a href="SignIn.jsp" style = "color: #555; text-decoration: none"><h5>Đăng kí tại đây</h5></a>
 			</form>
 		</section>
 	</main>	

@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Trang chủ</title>
 <link rel="stylesheet" type="text/css" href="Css/Style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 	<header>
@@ -13,45 +14,19 @@
 		<p>${nhanvien}</p>
 		<nav>
 			<ul>
-				<li><a href="index.jsp">Trang chủ</a></li>
-				<li><a href="IndexBaiDo?index=0">Bãi đỗ</a></li>
-				<li><a href="IndexNhanVien?index=0">Nhân viên</a></li>
-				<li><a href="IndexThongke.jsp">Thống kê</a></li>
-				<li><a href="LogIn.jsp">Đăng nhập</a></li>
-				<li><a href="index.jsp">Đăng xuất</a></li>
+				<li><a href="index.jsp"><i class="fa fa-home"></i> Trang chủ</a></li>
+				<li><a href="IndexBaiDo?index=0"><i class="fa fa-car"></i> Bãi đỗ</a></li>
+				<li><a href="IndexNhanVien?index=0"><i class="fa fa-users"></i> Nhân viên</a></li>
+				<li><a href="IndexThongke.jsp"><i class="fa fa-map-marker"></i> Địa chỉ</a></li>
+				<li><a href='LogIn.jsp'><i class='fa fa-sign-in'></i> Đăng nhập</a></li>
 			</ul>
 		</nav>
 	</header>
 	<main>
 		<section>
-			<div class="search">
-				<form action="SearchProcessing" method="post">
-					<input type="text" id="search" name = "search" placeholder="Tìm kiếm...">
-					<button type="submit">Tìm kiếm</button>
-				</form>
-			</div>
-			<h2>Các bãi đỗ</h2>
-			<table>
-				<thead>
-					<tr>
-						<th>Name</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<c:forEach var="l" items="${kq}">
-							<tr>
-								<td></td>
-							</tr>
-						</c:forEach>
-					</tr>
-				</tbody>
-			</table>
-			<div class="add">
-				<button>
-					<a href="AddBaiDo.jsp">Thêm bãi mới</a>
-				</button>
-			</div>
+			<center>
+				<img src="img/anh-dong.jpg"alt="alternatetext" width="1000px" height="500px">
+			</center>
 		</section>
 	</main>
 </body>

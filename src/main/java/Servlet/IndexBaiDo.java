@@ -60,7 +60,7 @@ public class IndexBaiDo extends HttpServlet {
 				
 				request.setAttribute("end", endPage);
 				request.setAttribute("lst", list);
-				request.getRequestDispatcher("/IndexNhanVien.jsp").forward(request, response);
+				request.getRequestDispatcher("/IndexBaiDo.jsp").forward(request, response);
 			}
 			String rawIndex = request.getParameter("index");
 			if (rawIndex != null) {
