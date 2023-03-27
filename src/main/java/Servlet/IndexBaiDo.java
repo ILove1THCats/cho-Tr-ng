@@ -65,15 +65,13 @@ public class IndexBaiDo extends HttpServlet {
 			String rawIndex = request.getParameter("index");
 			if (rawIndex != null) {
 				index = Integer.parseInt(rawIndex);
+				index = index * pageSize;
 			}
 			
 			list = DBUtils.WrapPageBD(conn, index, pageSize);
 
 			int count = DBUtils.countBD(conn);
 			endPage = count/pageSize;
-			if (count % pageSize != 0) {
-				endPage++;
-			}
 
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
