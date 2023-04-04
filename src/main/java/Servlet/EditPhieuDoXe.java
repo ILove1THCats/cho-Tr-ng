@@ -13,26 +13,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class EditNhanVienServlet
+ * Servlet implementation class EditPhieuDoXe
  */
-@WebServlet("/EditNhanVienServlet")
-public class EditNhanVienServlet extends HttpServlet {
+@WebServlet("/EditPhieuDoXe")
+public class EditPhieuDoXe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public EditPhieuDoXe() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
-	 * @see HttpServlet#HttpServlet()
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public EditNhanVienServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
@@ -40,10 +38,10 @@ public class EditNhanVienServlet extends HttpServlet {
 
 		String errorString = null;
 		String id = request.getParameter("id");
-		nhanVien nhanv = new nhanVien();
+		phieuDoXe ph = new phieuDoXe();
 		try {
 			Connection conn = MySQLConntUtils.getMySQLConnection();
-			nhanv = DBUtils.findNV(conn, id);
+			ph = DBUtils.findPDX(conn, id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -51,18 +49,16 @@ public class EditNhanVienServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("errorString", errorString);
-		request.setAttribute("nhanvien", nhanv);
-		request.getRequestDispatcher("/EditNhanVien.jsp").forward(request, response);
+		request.setAttribute("phieu", ph);
+		request.getRequestDispatcher("/EditPhieuDoXe.jsp").forward(request, response);
+
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		doGet(request, response);
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		Connection conn = null;
@@ -70,19 +66,18 @@ public class EditNhanVienServlet extends HttpServlet {
 			conn = MySQLConntUtils.getMySQLConnection();
 
 			String id = request.getParameter("id");
-			String name = request.getParameter("name");
-			String bdate = request.getParameter("bdate");
-			String sex = request.getParameter("sex");
-			String address = request.getParameter("address");
-			String phone = request.getParameter("phone");
+			String id_car = request.getParameter("id_car");
+			String timeIn = request.getParameter("timeIn");
+			String timeOut = request.getParameter("timeOut");
+			Float price = Float.parseFloat(request.getParameter("price"));
 
 
-			nhanVien nhanvien = new nhanVien(id, name, bdate, sex, address, phone);
+			phieuDoXe phieu = new phieuDoXe(id, id_car, timeIn, timeOut, price);
 
-			DBUtils.EditNhanV(conn, nhanvien);
+			DBUtils.EditPhieuDX(conn, phieu);
 
 			String contextPath = request.getContextPath();
-			response.sendRedirect(contextPath + "/IndexNhanVien");
+			response.sendRedirect(contextPath + "/IndexPhieuDoXe");
 		} catch (SQLException | ClassNotFoundException ex) {
 			Logger.getLogger(SignInServlet.class.getName()).log(Level.SEVERE, null, ex);
 		} finally {

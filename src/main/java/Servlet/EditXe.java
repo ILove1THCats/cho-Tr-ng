@@ -13,16 +13,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class EditNhanVienServlet
+ * Servlet implementation class EditXe
  */
-@WebServlet("/EditNhanVienServlet")
-public class EditNhanVienServlet extends HttpServlet {
+@WebServlet("/EditXe")
+public class EditXe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public EditNhanVienServlet() {
+	public EditXe() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -40,10 +40,10 @@ public class EditNhanVienServlet extends HttpServlet {
 
 		String errorString = null;
 		String id = request.getParameter("id");
-		nhanVien nhanv = new nhanVien();
+		xe x = new xe();
 		try {
 			Connection conn = MySQLConntUtils.getMySQLConnection();
-			nhanv = DBUtils.findNV(conn, id);
+			x = DBUtils.findXe(conn, id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -51,8 +51,8 @@ public class EditNhanVienServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("errorString", errorString);
-		request.setAttribute("nhanvien", nhanv);
-		request.getRequestDispatcher("/EditNhanVien.jsp").forward(request, response);
+		request.setAttribute("xe", x);
+		request.getRequestDispatcher("/EditXe.jsp").forward(request, response);
 	}
 
 	/**
@@ -62,7 +62,6 @@ public class EditNhanVienServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		doGet(request, response);
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		Connection conn = null;
@@ -70,19 +69,17 @@ public class EditNhanVienServlet extends HttpServlet {
 			conn = MySQLConntUtils.getMySQLConnection();
 
 			String id = request.getParameter("id");
-			String name = request.getParameter("name");
-			String bdate = request.getParameter("bdate");
-			String sex = request.getParameter("sex");
-			String address = request.getParameter("address");
-			String phone = request.getParameter("phone");
+			String catagory = request.getParameter("catagory");
+			String seanum = request.getParameter("seanum");
+			String color = request.getParameter("color");
+			String state = request.getParameter("state");
 
+			xe x = new xe(id, catagory, seanum, color, state);
 
-			nhanVien nhanvien = new nhanVien(id, name, bdate, sex, address, phone);
-
-			DBUtils.EditNhanV(conn, nhanvien);
+			DBUtils.EditXe(conn, x);
 
 			String contextPath = request.getContextPath();
-			response.sendRedirect(contextPath + "/IndexNhanVien");
+			response.sendRedirect(contextPath + "/IndexXe");
 		} catch (SQLException | ClassNotFoundException ex) {
 			Logger.getLogger(SignInServlet.class.getName()).log(Level.SEVERE, null, ex);
 		} finally {

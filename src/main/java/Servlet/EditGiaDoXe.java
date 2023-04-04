@@ -13,26 +13,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class EditBaiDo
+ * Servlet implementation class EditGiaDoXe
  */
-@WebServlet("/EditBaiDo")
-public class EditBaiDo extends HttpServlet {
+@WebServlet("/EditGiaDoXe")
+public class EditGiaDoXe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public EditGiaDoXe() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
-	 * @see HttpServlet#HttpServlet()
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public EditBaiDo() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
@@ -40,12 +38,10 @@ public class EditBaiDo extends HttpServlet {
 
 		String errorString = null;
 		String id = request.getParameter("id");
-		baiDo bai = new baiDo();
+		giaDoXe giaDX = new giaDoXe();
 		try {
-
 			Connection conn = MySQLConntUtils.getMySQLConnection();
-			bai = DBUtils.findBD(conn, id);
-
+			giaDX = DBUtils.findGDX(conn, id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -53,18 +49,15 @@ public class EditBaiDo extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("errorString", errorString);
-		request.setAttribute("bai", bai);
-		request.getRequestDispatcher("/EditBaiDo.jsp").forward(request, response);
+		request.setAttribute("gia", giaDX);
+		request.getRequestDispatcher("/EditNhanVien.jsp").forward(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		doGet(request, response);
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		Connection conn = null;
@@ -73,15 +66,15 @@ public class EditBaiDo extends HttpServlet {
 
 			String id = request.getParameter("id");
 			String name = request.getParameter("name");
-			String address = request.getParameter("address");
-			String telephone = request.getParameter("telephone");
+			String time = request.getParameter("time");
+			Float price = Float.parseFloat(request.getParameter("price"));
 
-			baiDo baid = new baiDo(id, name, address, telephone);
+			giaDoXe giadx = new giaDoXe(id, name, time, price);
 
-			DBUtils.EditBaiD(conn, baid);
+			DBUtils.EditGiaDX(conn, giadx);
 
 			String contextPath = request.getContextPath();
-			response.sendRedirect(contextPath + "/IndexBaiDo");
+			response.sendRedirect(contextPath + "/IndexGiaBaiDo");
 		} catch (SQLException | ClassNotFoundException ex) {
 			Logger.getLogger(SignInServlet.class.getName()).log(Level.SEVERE, null, ex);
 		} finally {

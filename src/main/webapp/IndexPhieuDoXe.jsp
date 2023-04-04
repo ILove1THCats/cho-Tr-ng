@@ -1,14 +1,10 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.util.List"%>
-<%@page import="Servlet.UserAccount"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Nhân viên</title>
+<title>Phiếu đỗ xe</title>
 <link rel="stylesheet" type="text/css" href="Css/Style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
@@ -28,21 +24,20 @@
 	<main>
 		<section>
 			<div class="search">
-				<form action="SearchNhanVien" method="post">
+				<form action="SearchPhieuDoXe" method="post">
 					<input type="text" id="search" name="search" placeholder="Tìm kiếm...">
 					<button type="submit">Tìm kiếm</button>
 				</form>
 			</div>
-			<h2>Nhân Viên</h2>
+			<h2>Phiếu đỗ xe</h2>
 			<table>
 				<thead>
 					<tr>
-						<th>Mã nhân viên</th>
-						<th>Tên nhân viên</th>
-						<th>Ngày sinh</th>
-						<th>Giới tính</th>
-						<th>Địa chỉ</th>
-						<th>Số điện thoại</th>
+						<th>Mã phiếu đỗ xe</th>
+						<th>Mã xe</th>
+						<th>Thời gian vào</th>
+						<th>Thời gian ra</th>
+						<th>Số tiền</th>
 						<th>Sửa</th>
 						<th>Xóa</th>
 					</tr>
@@ -51,26 +46,24 @@
 					<c:forEach var="l" items="${lst}">
 						<tr>
 							<td>${l.id}</td>
-							<td>${l.ho_ten}</td>
-							<td>${l.ngay_sinh}</td>
-							<td>${l.gioi_tinh}</td>
-							<td>${l.dia_chi}</td>
-							<td>${l.sdt}</td>
-							<td>${l.hinh_anh}</td>
-							<td><a href="EditNhanVienServlet?id=${l.id}"><i class="fa fa-edit"></i></a></td>
-							<td><a href="DeleteNhanVien?id=${l.id}"><i class="fa fa-trash"></i></a></td>
+							<td>${l.id_xe}</td>
+							<td>${l.thoi_gian_vao}</td>
+							<td>${l.thoi_gian_ra}</td>
+							<td>${l.so_tien}</td>
+							<td><a href="EditPhieuDoXe?id=${l.id}"><i class="fa fa-edit"></i></a></td>
+							<td><a href="DeletePhieuDoXe?id=${l.id}"><i class="fa fa-trash"></i></a></td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 			<div class="add1">
 				<c:forEach begin="0" end="${end}" var = "i">
-					<a href = "IndexNhanVien?index=${i}">${i}</a>
+					<a href = "IndexPhieuDoXe?index=${i}">${i}</a>
 				</c:forEach>
 			</div>
 			<div class="add">
 				<button>
-					<a href="AddNhanVien.jsp">Thêm nhân viên</a>
+					<a href="AddPhieuDoXe.jsp">Thêm nhân viên</a>
 				</button>
 			</div>
 		</section>

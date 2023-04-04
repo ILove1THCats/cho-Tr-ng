@@ -15,35 +15,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class IndexNhanVien
+ * Servlet implementation class IndexPhieudoxe
  */
-@WebServlet("/IndexNhanVien")
-public class IndexNhanVien extends HttpServlet {
+@WebServlet("/IndexPhieudoxe")
+public class IndexPhieudoxe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public IndexPhieudoxe() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
-	 * @see HttpServlet#HttpServlet()
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public IndexNhanVien() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
-
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 
 		Connection conn = null;
 
-		List<nhanVien> list = new ArrayList<nhanVien>();
+		List<phieuDoXe> list = new ArrayList<phieuDoXe>();
 		int endPage = 0;
 		int pageSize = 3;
 		int index = 0;
@@ -56,9 +54,9 @@ public class IndexNhanVien extends HttpServlet {
 				index = index * pageSize;
 			}
 			// Phân trang
-			list = DBUtils.WrapPageNV(conn, index, pageSize);
+			list = DBUtils.WrapPagePDX(conn, index, pageSize);
 
-			int count = DBUtils.countNV(conn);
+			int count = DBUtils.countPDX(conn);
 			endPage = count/pageSize;
 
 		} catch (ClassNotFoundException | SQLException e) {
@@ -77,17 +75,16 @@ public class IndexNhanVien extends HttpServlet {
 
 		request.setAttribute("end", endPage);
 		request.setAttribute("lst", list);
-		request.getRequestDispatcher("/IndexNhanVien.jsp").forward(request, response);
+		request.getRequestDispatcher("/IndexPhieuDoXe.jsp").forward(request, response);
+	
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		doGet(request, response);
+		doGet(request, response);
 	}
 
 }

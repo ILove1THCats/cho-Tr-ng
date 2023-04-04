@@ -9,7 +9,7 @@
 </head>
 <body>
 		<section>
-			<h1>Thêm bãi đỗ xe mới</h1>
+			<h1>Thêm xe mới</h1>
 			<form method="Post" action = "CreateBaiDo">
 				<label for="name">Biển số:</label><br>
 				<input type="text" id="name" name="name"><br>
@@ -20,7 +20,7 @@
 				<label for="phone">Số điện thoại:</label><br>
 				<input type="tel" id="phone" name="phone"><br>
 		
-				<input type="submit" value="Thêm bãi đỗ xe">
+				<input type="submit" value="Thêm xe">
 			</form>	
 		</section>
 </body>

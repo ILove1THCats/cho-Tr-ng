@@ -13,60 +13,56 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CreateBaiDo
+ * Servlet implementation class CreateGiaDoXe
  */
-@WebServlet("/CreateBaiDo")
-public class CreateBaiDo extends HttpServlet {
+@WebServlet("/CreateGiaDoXe")
+public class CreateGiaDoXe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public CreateGiaDoXe() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
-	 * @see HttpServlet#HttpServlet()
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	public CreateBaiDo() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		doGet(request, response);
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		Connection conn = null;
-
+		
 		try {
 			conn = MySQLConntUtils.getMySQLConnection();
-
+			
+			String id = request.getParameter("id");
 			String name = request.getParameter("name");
-			String address = request.getParameter("address");
-			String telephone = request.getParameter("phone");
-
-			baiDo baid = new baiDo(name, address, telephone);
-
-			DBUtils.insertBDo(conn, baid);
-
+			String time = request.getParameter("time");
+			Float price = Float.parseFloat(request.getParameter("price"));
+			
+			giaDoXe gdx = new giaDoXe(id, name, time, price);
+			
+			DBUtils.insertGDoXe(conn, gdx);
+			
 			String context = request.getContextPath();
-			response.sendRedirect(context + "/IndexBaiDo");
-
+			response.sendRedirect(context + "/IndexGiaDoXe");
+			
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
 			Logger.getLogger(SignInServlet.class.getName()).log(Level.SEVERE, null, e);
-		} finally {
+		}finally {
 			if (conn != null) {
 				try {
 					conn.close();

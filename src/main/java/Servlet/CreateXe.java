@@ -15,16 +15,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class IndexNhanVien
+ * Servlet implementation class CreateXe
  */
-@WebServlet("/IndexNhanVien")
-public class IndexNhanVien extends HttpServlet {
+@WebServlet("/CreateXe")
+public class CreateXe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public IndexNhanVien() {
+	public CreateXe() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -36,30 +36,50 @@ public class IndexNhanVien extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-//		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		List<giaDoXe> x = new ArrayList<giaDoXe>();
+		
+		Connection conn;
+		try {
+			conn = MySQLConntUtils.getMySQLConnection();
+			x = DBUtils.createShowX(conn);
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		request.setAttribute("create", x);
+		request.getRequestDispatcher("/AddXe.jsp").forward(request, response);
+	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-
 		Connection conn = null;
-
-		List<nhanVien> list = new ArrayList<nhanVien>();
-		int endPage = 0;
-		int pageSize = 3;
-		int index = 0;
 
 		try {
 			conn = MySQLConntUtils.getMySQLConnection();
-			String rawIndex = request.getParameter("index");
-			if (rawIndex != null) {
-				index = Integer.parseInt(rawIndex);
-				index = index * pageSize;
-			}
-			// Phân trang
-			list = DBUtils.WrapPageNV(conn, index, pageSize);
 
-			int count = DBUtils.countNV(conn);
-			endPage = count/pageSize;
+			String id = request.getParameter("id");
+			String catagory = request.getParameter("catagory");
+			String seanum = request.getParameter("seanum");
+			String color = request.getParameter("color");
+			String state = request.getParameter("state");
+			
+			xe nhanv = new xe(id, catagory, seanum, color, state);
+
+			DBUtils.insertXe(conn, nhanv);
+
+			String context = request.getContextPath();
+			response.sendRedirect(context + "/IndexXe");
 
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
@@ -74,20 +94,6 @@ public class IndexNhanVien extends HttpServlet {
 			}
 
 		}
-
-		request.setAttribute("end", endPage);
-		request.setAttribute("lst", list);
-		request.getRequestDispatcher("/IndexNhanVien.jsp").forward(request, response);
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		doGet(request, response);
 	}
 
 }

@@ -18,7 +18,9 @@
 		<nav>
 			<ul>
 				<li><a href="index.jsp"><i class="fa fa-home"></i> Trang chủ</a></li>
-				<li><a href="IndexBaiDo?index=0"><i class="fa fa-car"></i> Bãi đỗ</a></li>
+				<li><a href="IndexGiaBaiDo?index=0"><i class="fa fa-car"></i> Giá đỗ xe</a></li>
+				<li><a href="IndexXe?index=0"><i class="fa fa-users"></i> Xe</a></li>
+				<li><a href="IndexPhieudoxe?index=0"><i class="fa fa-users"></i> Phiếu đỗ xe</a></li>
 				<li><a href="IndexNhanVien?index=0"><i class="fa fa-users"></i> Nhân viên</a></li>
 				<li><a href="IndexThongke.jsp"><i class="fa fa-map-marker"></i> Địa chỉ</a></li>
 				<% if (isLoggedIn) { %>
