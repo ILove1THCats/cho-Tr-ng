@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,14 +10,16 @@
 </head>
 <body>
 	<section>
-		<h1>Thay đổi thông tin nhân viên</h1>
-			<form action="EditNhanVienServlet" method="post">
+		<h1>Thay đổi thông tin xe</h1>
+			<form action="EditXe?id_cu=${xe.getId()}" method="post">
 			
-				<label for="id">Mã xe:</label> 
-				<input type="text" id="id" name="id" value = "${xe.getID()}"> 
-			
-				<label for="catagory">Loại xe:</label> 
-				<input type="text" id="catagory" name="catagory" value = "${xe.getLoaixe()}" > 
+				<label for="catagory">Loại xe:</label><br>
+				<select id="catagory" name="catagory" required>
+					<option value = "${cal}">${cal}</option>
+					<c:forEach var = "cr" items = "${create}">
+						<option value = "${cr.id}">${cr.id}</option>
+					</c:forEach>					
+				</select>
 				
 				<label for="seanum">Biển số:</label>
 				<input type="text" id="seanum" name="seanum" value = "${xe.getBienso()}">

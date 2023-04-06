@@ -10,7 +10,7 @@
 </head>
 <body>
 	<section>
-		<h1>Thêm nhân viên mới</h1>
+		<h1>Thêm phiếu đỗ xe</h1>
 			<form method="Post" action="CreatePhieuDoXe" >
 				<label for="id">Mã phiếu đỗ xe:</label><br> <input type="text" name="id"><br> 
 				<label for="id_car">Mã xe:</label><br>
@@ -20,9 +20,9 @@
 						<option value = "${cr.id}">${cr.id}</option>
 					</c:forEach>					
 				</select>
-				<label for="timeIn">Thời gian vào:</label><br> <input type="number" name="timeIn"><br>
-				<label for="timeOut">Thời gian ra:</label><br> <input type="number" name="timeOut"><br>
-				<label for="price">Số tiền:</label><br> <input type="number" name="price"><br>
+				<label for="timeIn">Thời gian vào:</label><br> <input type="date" name="timeIn"><br>
+				<label for="timeOut">Thời gian ra:</label><br> <input type="date" name="timeOut"><br>
+				<label for="price">Số tiền:</label><br> <input type="text" name="price"><br>
 				<input type="submit" value="Thêm phiếu đỗ xe">
 			</form>
 	</section>

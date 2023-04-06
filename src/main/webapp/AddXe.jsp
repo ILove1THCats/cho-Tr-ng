@@ -12,8 +12,8 @@
 	<section>
 			<h1>Thêm xe vào</h1>
 			<form method="post" action="CreateXe">
-				<label for="name">Mã xe:</label><br>
-				<input type="text" id="name" name="name"><br>
+				<label for="id">Mã xe:</label><br>
+				<input type="text" id="id" name="id"><br>
 		
 				<label for="catagory">Loại xe:</label><br>
 				<select id="catagory" name="catagory" required>
@@ -27,10 +27,10 @@
 				<input type="text" id="seanum" name="seanum" ><br>
 		
 				<label for="color">Màu sắc:</label><br>
-				<input type="number" id="color" name="color"><br>
+				<input type="text" id="color" name="color"><br>
 				
 				<label for="state">Tình trạng:</label><br>
-				<input type="number" id="state" name="state"><br>
+				<input type="text" id="state" name="state"><br>
 		
 				<input type="submit" value="Thêm xe">
 			</form>	

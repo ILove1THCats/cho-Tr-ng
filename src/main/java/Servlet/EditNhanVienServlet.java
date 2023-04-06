@@ -1,20 +1,29 @@
 package Servlet;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  * Servlet implementation class EditNhanVienServlet
  */
+@MultipartConfig(
+		 fileSizeThreshold = 1024 * 1024 * 10,
+		 maxFileSize = 1024 * 1024 * 50,
+		 maxRequestSize = 1024 * 1024 * 100)
 @WebServlet("/EditNhanVienServlet")
 public class EditNhanVienServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -75,11 +84,17 @@ public class EditNhanVienServlet extends HttpServlet {
 			String sex = request.getParameter("sex");
 			String address = request.getParameter("address");
 			String phone = request.getParameter("phone");
+			String image = "";
+			Part filePart = request.getPart("pictureNV");
+			String filename = extractFilename(filePart);
+			filename = new File(filename).getName();
+			filePart.write("D:/Java_Nhóm 2 ngu/Demo_cuoiky/src/main/webapp/img" + filename);
+			image = "img/" + filename;
+			String id_cu = request.getParameter("id_cu");
 
+			nhanVien nhanvien = new nhanVien(id, name, bdate, sex, address, phone, image);
 
-			nhanVien nhanvien = new nhanVien(id, name, bdate, sex, address, phone);
-
-			DBUtils.EditNhanV(conn, nhanvien);
+			DBUtils.EditNhanV(conn, nhanvien, id_cu);
 
 			String contextPath = request.getContextPath();
 			response.sendRedirect(contextPath + "/IndexNhanVien");
@@ -93,8 +108,17 @@ public class EditNhanVienServlet extends HttpServlet {
 					Logger.getLogger(SignInServlet.class.getName()).log(Level.SEVERE, null, ex);
 				}
 			}
-
 		}
+	}
+
+	private String extractFilename (final Part part) {
+		String partHeader = part.getHeader("content-disposition");
+		for(String content: partHeader.split(";")) {
+			if(content.trim().startsWith("filename")) {
+				return content.substring(content.indexOf('=') + 2, content.length() - 1);
+			}
+		}
+		return "";
 	}
 
 }

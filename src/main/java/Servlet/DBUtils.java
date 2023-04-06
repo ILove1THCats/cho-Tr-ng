@@ -52,7 +52,7 @@ public class DBUtils {
 	}
 	
 	public static void insertXe(Connection conn, xe x) throws SQLException {
-		String sql = "insert into nhanvien(id, loai_xe, bien_so, mau_sac, tinh_trang) values (?,?,?,?,?)";
+		String sql = "insert into xe(id, loai_xe, bien_so, mau_sac, tinh_trang) values (?,?,?,?,?)";
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
 
@@ -109,6 +109,7 @@ public class DBUtils {
 			String sex = rs.getString("gioi_tinh");
 			String addr = rs.getString("dia_chi");
 			String phone = rs.getString("sdt");
+			String img = rs.getString("hinh_anh");
 			
 			nv.setId(iden);
 			nv.setHo_ten(name);
@@ -116,6 +117,7 @@ public class DBUtils {
 			nv.setGioi_tinh(sex);
 			nv.setDia_chi(addr);
 			nv.setSdt(phone);
+			nv.setHinh_anh(img);
 
 			return nv;
 		}
@@ -146,7 +148,7 @@ public class DBUtils {
 	}
 	
 	public static xe findXe(Connection conn, String id) throws SQLException {
-		String sql = "select * from nhanvien where id = ?";
+		String sql = "select * from xe where id = ?";
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
 		pstm.setString(1, id);
@@ -194,65 +196,41 @@ public class DBUtils {
 		}
 		return null;
 	}
-
-	public static List<nhanVien> Allnhanvien(Connection conn) throws SQLException {
-		String sql = "Select * from nhanvien";
-		PreparedStatement pstm = conn.prepareStatement(sql);
-		ResultSet rs = pstm.executeQuery();
-		List<nhanVien> list = new ArrayList();
-		while (rs.next()) {
-			
-			String iden = rs.getString("id");
-			String name = rs.getString("ho_ten");
-			String bdate = rs.getString("ngay_sinh");
-			String sex = rs.getString("gioi_tinh");
-			String addr = rs.getString("dia_chi");
-			String phone = rs.getString("sdt");
-			
-			nhanVien nv = new nhanVien();
-			nv.setId(iden);
-			nv.setHo_ten(name);
-			nv.setNgay_sinh(bdate);
-			nv.setGioi_tinh(sex);
-			nv.setDia_chi(addr);
-			nv.setSdt(phone);
-			list.add(nv);
-		}
-		return list;
-	}
 	
-	public static void EditNhanV(Connection conn, nhanVien nv) throws SQLException {
-		String sql = "update nhanvien set ho_ten = ?, ngay_sinh = ?, gioi_tinh = ?, dia_chi = ?,"
-				+ "sdt = ? where id = ?";
+	public static void EditNhanV(Connection conn, nhanVien nv, String id) throws SQLException {
+		String sql = "update nhanvien set id = ?, ho_ten = ?, ngay_sinh = ?, gioi_tinh = ?, dia_chi = ?,"
+				+ "sdt = ?, hinh_anh = ? where id = ?";
 		
 		PreparedStatement pstm = conn.prepareStatement(sql);
 
-		pstm.setString(1, nv.getHo_ten());
-		pstm.setString(2, nv.getNgay_sinh());
-		pstm.setString(3, nv.getGioi_tinh());
-		pstm.setString(4, nv.getDia_chi());
-		pstm.setString(5, nv.getSdt());
-		pstm.setString(6, nv.getId());
+		pstm.setString(1, nv.getId());
+		pstm.setString(2, nv.getHo_ten());
+		pstm.setString(3, nv.getNgay_sinh());
+		pstm.setString(4, nv.getGioi_tinh());
+		pstm.setString(5, nv.getDia_chi());
+		pstm.setString(6, nv.getSdt());
+		pstm.setString(7, nv.getHinh_anh());
+		pstm.setString(8, id);
 
 		pstm.executeUpdate();
 	}
 
 	public static void EditGiaDX(Connection conn, giaDoXe gdx) throws SQLException {
-		String sql = "update gia_do_xe set id = ?, loai_xe = ?, thoi_gian = ?, gia = ?"
+		String sql = "update gia_do_xe set loai_xe = ?, thoi_gian = ?, gia = ?"
 				+ " where id = ?";
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
 
-		pstm.setString(1, gdx.getId());
-		pstm.setString(2, gdx.getName());
-		pstm.setString(3, gdx.getTime());
-		pstm.setFloat(4, gdx.getPrice());
+		pstm.setString(1, gdx.getName());
+		pstm.setString(2, gdx.getTime());
+		pstm.setFloat(3, gdx.getPrice());
+		pstm.setString(4, gdx.getId());
 
 		pstm.executeUpdate();
 	}
 	
 	public static void EditXe(Connection conn, xe x) throws SQLException {
-		String sql = "update xe set loai_xe = ?, bien_so = ?, mau_sac = ?, tinh_trang = ?,"
+		String sql = "update xe set loai_xe = ?, bien_so = ?, mau_sac = ?, tinh_trang = ?"
 				+ "where id = ?";
 		
 		PreparedStatement pstm = conn.prepareStatement(sql);
@@ -266,8 +244,8 @@ public class DBUtils {
 		pstm.executeUpdate();
 	}
 	
-	public static void EditPhieuDX(Connection conn, phieuDoXe pdx) throws SQLException {
-		String sql = "update gia_do_xe set id = ?, id_xe = ?, thoi_gian_vao = ?, thoi_gian_ra = ?"
+	public static void EditPhieuDX(Connection conn, phieuDoXe pdx, String id) throws SQLException {
+		String sql = "update phieu_do_xe set id = ?, id_xe = ?, thoi_gian_vao = ?, thoi_gian_ra = ?"
 				+ ", so_tien = ? where id = ?";
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
@@ -277,6 +255,7 @@ public class DBUtils {
 		pstm.setString(3, pdx.getThoi_gian_vao());
 		pstm.setString(4, pdx.getThoi_gian_ra());
 		pstm.setFloat(5, pdx.getSo_tien());
+		pstm.setString(6, id);
 
 		pstm.executeUpdate();
 	}
@@ -336,7 +315,8 @@ public class DBUtils {
 			String bdate = rs.getString("ngay_sinh");
 			String sex = rs.getString("gioi_tinh");
 			String addr = rs.getString("dia_chi");
-			String phone = rs.getString("sdt");			
+			String phone = rs.getString("sdt");	
+			String img = rs.getString("hinh_anh");
 
 			nhanVien nhanv = new nhanVien();
 			nhanv.setId(id);
@@ -345,6 +325,7 @@ public class DBUtils {
 			nhanv.setGioi_tinh(sex);
 			nhanv.setDia_chi(addr);
 			nhanv.setSdt(phone); 
+			nhanv.setHinh_anh(img);
 			NV.add(nhanv);
 
 		}
@@ -514,7 +495,8 @@ public class DBUtils {
 			String bdate = rs.getString("ngay_sinh");
 			String sex = rs.getString("gioi_tinh");
 			String addr = rs.getString("dia_chi");
-			String phone = rs.getString("sdt");			
+			String phone = rs.getString("sdt");
+			String img = rs.getString("hinh_anh");
 
 			nhanVien nhanv = new nhanVien();
 			nhanv.setId(id);
@@ -523,6 +505,7 @@ public class DBUtils {
 			nhanv.setGioi_tinh(sex);
 			nhanv.setDia_chi(addr);
 			nhanv.setSdt(phone); 
+			nhanv.setHinh_anh(img);
 			NV.add(nhanv);
 		}
 
@@ -574,13 +557,13 @@ public class DBUtils {
 			String color = rs.getString("mau_sac");	
 			String state = rs.getString("tinh_trang");	
 
-			xe x = new xe();
-			x.setId(id);
-			x.setLoaixe(loaixe);
-			x.setBienso(seanum);
-			x.setMausac(color);
-			x.setTinhtrang(state);
-			X.add(x);
+			xe xe = new xe();
+			xe.setId(id);
+			xe.setLoaixe(loaixe);
+			xe.setBienso(seanum);
+			xe.setMausac(color);
+			xe.setTinhtrang(state);
+			X.add(xe);
 
 		}
 

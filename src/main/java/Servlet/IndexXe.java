@@ -53,7 +53,7 @@ public class IndexXe extends HttpServlet {
 				index = index * pageSize;
 			}
 			// Phân trang
-			list = DBUtils.WrapPageX(conn, pageSize, index);
+			list = DBUtils.WrapPageX(conn, index, pageSize);
 
 			int count = DBUtils.countXe(conn);
 			endPage = count/pageSize;

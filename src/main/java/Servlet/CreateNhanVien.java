@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,10 @@ import javax.servlet.http.Part;
 /**
  * Servlet implementation class CreateNhanVien
  */
+@MultipartConfig(
+		 fileSizeThreshold = 1024 * 1024 * 10,
+		 maxFileSize = 1024 * 1024 * 50,
+		 maxRequestSize = 1024 * 1024 * 100)
 @WebServlet("/CreateNhanVien")
 public class CreateNhanVien extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -58,19 +63,14 @@ public class CreateNhanVien extends HttpServlet {
 			String sex = request.getParameter("sex");
 			String address = request.getParameter("address");
 			String phone = request.getParameter("phone");
-			Part filePart = request.getPart("file");
-			String filename = getFileName(filePart);
-			InputStream fileContent = filePart.getInputStream();
-			
-			String uploadThuMuc = getServletContext().getRealPath("D:/Java_Nhóm 2 ngu/Demo_cuoiky/src/main/webapp/img");
-			File upload = new File(uploadThuMuc);
-			if (!upload.exists()) {
-				upload.mkdir();
-			}
-			String filePath = uploadThuMuc + File.separator + filename;
-			Files.copy(fileContent, new File(filePath).toPath());
+			String image = "";
+			Part filePart = request.getPart("pictureNV");
+			String filename = extractFilename(filePart);
+			filename = new File(filename).getName();
 
-			nhanVien nhanv = new nhanVien(id, name, bdate, sex, address, phone, filePath);
+			filePart.write("D:/Java_Nhóm 2 ngu/Demo_cuoiky/src/main/webapp/img/" + filename);
+			image = "img/" + filename;
+			nhanVien nhanv = new nhanVien(id, name, bdate, sex, address, phone, image);
 			
 			DBUtils.insertNVien(conn, nhanv);
 			
@@ -92,14 +92,14 @@ public class CreateNhanVien extends HttpServlet {
 		}	
 	}
 	
-	private String getFileName (final Part part) {
-		final String partHeader = part.getHeader("content-disposition");
+	private String extractFilename (final Part part) {
+		String partHeader = part.getHeader("content-disposition");
 		for(String content: partHeader.split(";")) {
 			if(content.trim().startsWith("filename")) {
-				return content.substring(content.indexOf('=')+ 1).trim().replace("\"", "");
+				return content.substring(content.indexOf('=') + 2, content.length() - 1);
 			}
 		}
-		return null;
+		return "";
 	}
 
 }

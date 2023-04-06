@@ -3,6 +3,8 @@ package Servlet;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -40,10 +42,17 @@ public class EditXe extends HttpServlet {
 
 		String errorString = null;
 		String id = request.getParameter("id");
+		String cal = request.getParameter("cal");
 		xe x = new xe();
+		List<giaDoXe> xe = new ArrayList<giaDoXe>();
+		
 		try {
 			Connection conn = MySQLConntUtils.getMySQLConnection();
 			x = DBUtils.findXe(conn, id);
+			
+			xe = DBUtils.createShowX(conn);
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -51,7 +60,9 @@ public class EditXe extends HttpServlet {
 			e.printStackTrace();
 		}
 		request.setAttribute("errorString", errorString);
+		request.setAttribute("create", xe);
 		request.setAttribute("xe", x);
+		request.setAttribute("cal", cal);
 		request.getRequestDispatcher("/EditXe.jsp").forward(request, response);
 	}
 
@@ -68,7 +79,7 @@ public class EditXe extends HttpServlet {
 		try {
 			conn = MySQLConntUtils.getMySQLConnection();
 
-			String id = request.getParameter("id");
+			String id = request.getParameter("id_cu");
 			String catagory = request.getParameter("catagory");
 			String seanum = request.getParameter("seanum");
 			String color = request.getParameter("color");

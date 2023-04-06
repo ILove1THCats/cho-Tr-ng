@@ -50,7 +50,7 @@ public class EditGiaDoXe extends HttpServlet {
 		}
 		request.setAttribute("errorString", errorString);
 		request.setAttribute("gia", giaDX);
-		request.getRequestDispatcher("/EditNhanVien.jsp").forward(request, response);
+		request.getRequestDispatcher("/EditGiaDoXe.jsp").forward(request, response);
 	}
 
 	/**
@@ -64,7 +64,7 @@ public class EditGiaDoXe extends HttpServlet {
 		try {
 			conn = MySQLConntUtils.getMySQLConnection();
 
-			String id = request.getParameter("id");
+			String id = request.getParameter("id_cu");
 			String name = request.getParameter("name");
 			String time = request.getParameter("time");
 			Float price = Float.parseFloat(request.getParameter("price"));

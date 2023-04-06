@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+  boolean isLoggedIn = session.getAttribute("username") != null;
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,15 +17,19 @@
 		<h1>Quản lý bãi đỗ xe</h1>
 		<nav>
 			<ul>
-				<li><a href="index.jsp"><i class="fa fa-home"></i> Trang
-						chủ</a></li>
-				<li><a href="IndexBaiDo"><i class="fa fa-car"></i> Bãi đỗ</a></li>
-				<li><a href="IndexNhanVien"><i class="fa fa-users"></i>
-						Nhân viên</a></li>
-				<li><a href="IndexThongke.jsp"><i class="fa fa-map-marker"></i>
-						Địa chỉ</a></li>
-				<li><a href='LogIn.jsp'><i class='fa fa-sign-in'></i> Đăng
-						nhập</a></li>
+				<li><a href="index.jsp"><i class="fa fa-home"></i> Trang chủ</a></li>
+				<li><a href="IndexGiaBaiDo?index=0"><i class="fa fa-car"></i> Giá đỗ xe</a></li>
+				<li><a href="IndexXe?index=0"><i class="fa fa-users"></i> Xe</a></li>
+				<li><a href="IndexPhieudoxe?index=0"><i class="fa fa-users"></i> Phiếu đỗ xe</a></li>
+				<li><a href="IndexNhanVien?index=0"><i class="fa fa-users"></i> Nhân viên</a></li>
+				<li><a href="IndexThongke.jsp"><i class="fa fa-map-marker"></i> Địa chỉ</a></li>
+				<% if (isLoggedIn) { %>
+				  <li><a href="index.jsp<%session = request.getSession();
+								session.removeAttribute("username");
+								isLoggedIn = false;%>"><i class='fa fa-sign-in'></i> Đăng xuất</a></li>
+				<% } else { %>
+				  <li><a href="LogIn.jsp"><i class='fa fa-sign-in'></i> Đăng nhập</a></li>
+				<% } %>
 			</ul>
 		</nav>
 	</header>

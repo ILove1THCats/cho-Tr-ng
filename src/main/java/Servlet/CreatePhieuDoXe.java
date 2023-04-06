@@ -75,7 +75,7 @@ public class CreatePhieuDoXe extends HttpServlet {
 			DBUtils.insertPDXe(conn, phieu);
 			
 			String context = request.getContextPath();
-			response.sendRedirect(context + "/IndexPhieuDoXe");
+			response.sendRedirect(context + "/IndexPhieudoxe");
 			
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block

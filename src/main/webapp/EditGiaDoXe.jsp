@@ -9,11 +9,8 @@
 </head>
 <body>
 	<section>
-		<h1>Thay đổi thông tin nhân viên</h1>
-			<form action="EditGiaDoXe" method="post">
-			
-				<label for="id">Mã nhân viên:</label> 
-				<input type="text" id="id" name="id" value = "${gia.getID()}"> 
+		<h1>Thay đổi thông tin giá đỗ xe</h1>
+			<form action="EditGiaDoXe?id_cu=${gia.getId()}" method="post">
 			
 				<label for="name">Loại xe:</label> 
 				<input type="text" id="name" name="name" value = "${gia.getName()}" > 
@@ -23,6 +20,8 @@
 				
 				<label for="price">Giá:</label> 
 				<input type="number" id="price" name="price" value = "${gia.getPrice()}">
+				
+				<input type="submit" value="Sửa thông tin giá đỗ xe">
 			</form>
 	</section>
 </body>
