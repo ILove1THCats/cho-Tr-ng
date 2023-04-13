@@ -60,8 +60,6 @@ public class LogInServlet extends HttpServlet {
 				
 				HttpSession session = request.getSession();
 				session.setAttribute("username", username);
-				UserAccount usr = new UserAccount();
-				request.setAttribute("nhanvien", "Xin chào! Bạn " + username + " yêu dấu!");
 				request.getRequestDispatcher("/index.jsp").forward(request, response);
 			}else {
 				
@@ -81,7 +79,7 @@ public class LogInServlet extends HttpServlet {
 			}
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
-			Logger.getLogger(SignInServlet.class.getName()).log(Level.SEVERE, null, e);
+			Logger.getLogger(LogInServlet.class.getName()).log(Level.SEVERE, null, e);
 		}
 		
 		

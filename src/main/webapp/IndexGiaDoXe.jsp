@@ -2,33 +2,64 @@
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
-  boolean isLoggedIn = session.getAttribute("username") != null;
+  String user = (String)session.getAttribute("username");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>GiaDoXe</title>
+<title>Parking fee</title>
 <link rel="stylesheet" type="text/css" href="Css/Style.css">
+<link rel="icon" type="image/x-icon" href="https://github.com/Truong02022002/demojava/blob/master/src/main/webapp/img/favicon.PNG?raw=true">
+<style>
+.fa {
+  display: inline-block; /* Hiển thị biểu tượng như một khối inline */
+  font-size: 16px; /* Kích thước của biểu tượng */
+  margin-right: 5px; /* Khoảng cách giữa biểu tượng và văn bản */
+}
+.fa-edit {
+  color: black; /* Màu của biểu tượng sửa */
+}
+.fa-trash {
+  color: black; /* Màu của biểu tượng xóa */
+}
+.add1 {
+  display: flex; /* Sử dụng flexbox để căn giữa nội dung trong div */
+  margin-top: 20px; /* Khoảng cách từ đỉnh trang web */
+}
+.add1 a {
+  display: inline-block; /* Hiển thị các liên kết dưới dạng khối inline */
+  padding: 10px; /* Khoảng cách giữa nội dung và đường viền */
+  margin: 0 5px; /* Khoảng cách giữa các liên kết */
+  color: #333; /* Màu chữ của liên kết */
+  text-decoration: none; /* Loại bỏ gạch chân trong văn bản liên kết */
+  border: 1px solid #ccc; /* Đường viền liên kết */
+  border-radius: 5px; /* Bo tròn góc của liên kết */
+}
+.add1 a:hover {
+  background-color: #eee; /* Màu nền khi rê chuột vào liên kết */
+}
+</style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 	<header>
-		<h1>Quản lý bãi đỗ xe</h1>
+		<h1>Parking plot management</h1>
+		<%if(user != null) {%>
+			<p><%= user%></p>
+		<%} %>
 		<nav>
 			<ul>
-				<li><a href="index.jsp"><i class="fa fa-home"></i> Trang chủ</a></li>
-				<li><a href="IndexGiaBaiDo?index=0"><i class="fa fa-car"></i> Giá đỗ xe</a></li>
-				<li><a href="IndexXe?index=0"><i class="fa fa-users"></i> Xe</a></li>
-				<li><a href="IndexPhieudoxe?index=0"><i class="fa fa-users"></i> Phiếu đỗ xe</a></li>
-				<li><a href="IndexNhanVien?index=0"><i class="fa fa-users"></i> Nhân viên</a></li>
-				<li><a href="IndexThongke.jsp"><i class="fa fa-map-marker"></i> Địa chỉ</a></li>
-				<% if (isLoggedIn) { %>
-				  <li><a href="index.jsp<%session = request.getSession();
-								session.removeAttribute("username");
-								isLoggedIn = false;%>"><i class='fa fa-sign-in'></i> Đăng xuất</a></li>
+				<li><a href="index.jsp"><i class="fa fa-home"></i> Home</a></li>
+				<li><a href="IndexGiaBaiDo?index=0"><i class="fa fa-money"></i> Parking fee</a></li>
+				<li><a href="IndexXe?index=0"><i class="fa fa-users"></i> Vehicle</a></li>
+				<li><a href="IndexPhieudoxe?index=0"><i class="fa fa-users"></i> Parking ticket</a></li>
+				<li><a href="IndexNhanVien?index=0"><i class="fa fa-users"></i> Employee</a></li>
+				<li><a href="IndexThongke.jsp"><i class="fa fa-map-marker"></i> Address</a></li>
+				<% if (user != null) { %>
+				  <li><a href="signOut"><i class='fa fa-sign-in'></i> Log out</a></li>
 				<% } else { %>
-				  <li><a href="LogIn.jsp"><i class='fa fa-sign-in'></i> Đăng nhập</a></li>
+				  <li><a href="LogIn.jsp"><i class='fa fa-sign-in'></i> Log in</a></li>
 				<% } %>
 			</ul>
 		</nav>
@@ -37,20 +68,20 @@
 		<section>
 			<div class="search">
 				<form action="SearchGiaDoXe" method="post">
-					<input type="text" id="search" name="search" placeholder="Tìm kiếm...">
-					<button type="submit">Tìm kiếm</button>
+					<input type="text" id="search" name="search" placeholder="Search...">
+					<button type="submit">Search</button>
 				</form>
 			</div>
-			<h2>Giá đõ xe</h2>
+			<h2>Parking fee</h2>
 			<table>
 				<thead>
 					<tr>
-						<th>Mã</th>
-						<th>Loại xe</th>
-						<th>Thời gian</th>
-						<th>Giá</th>
-						<th>Sửa</th>
-						<th>Xóa</th>
+						<th>Id</th>
+						<th>Types of vehicle</th>
+						<th>Times</th>
+						<th>Fee</th>
+						<th>Edit</th>
+						<th>Delete</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -70,12 +101,12 @@
 			</table>
 			<div class="add1">
 				<c:forEach begin="0" end="${end}" var="i">
-					<a href="IndexGiaBaiDo?index=${i}">${i}</a>
+					<a href="IndexGiaBaiDo?index=${i}">${i+1}</a>
 				</c:forEach>
 			</div>
 			<div class="add">
 				<button>
-					<a href="AddGiaDoXe.jsp">Thêm nhân viên</a>
+					<a href="AddGiaDoXe.jsp">Add new employee</a>
 				</button>
 			</div>
 		</section>

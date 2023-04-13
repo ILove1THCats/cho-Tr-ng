@@ -99,13 +99,13 @@ public class EditNhanVienServlet extends HttpServlet {
 			String contextPath = request.getContextPath();
 			response.sendRedirect(contextPath + "/IndexNhanVien");
 		} catch (SQLException | ClassNotFoundException ex) {
-			Logger.getLogger(SignInServlet.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(LogInServlet.class.getName()).log(Level.SEVERE, null, ex);
 		} finally {
 			if (conn != null) {
 				try {
 					conn.close();
 				} catch (SQLException ex) {
-					Logger.getLogger(SignInServlet.class.getName()).log(Level.SEVERE, null, ex);
+					Logger.getLogger(LogInServlet.class.getName()).log(Level.SEVERE, null, ex);
 				}
 			}
 		}

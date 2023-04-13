@@ -4,22 +4,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Thêm nhân viên</title>
+<title>Add new emloyee</title>
 <link rel="stylesheet" type="text/css" href="Css/StyleAdd.css">
+<link rel="icon" type="image/x-icon" href="https://github.com/Truong02022002/demojava/blob/master/src/main/webapp/img/favicon.PNG?raw=true">
 </head>
 <body>
 	<section>
-		<h1>Thêm nhân viên mới</h1>
+		<h1>Add new employee</h1>
 			<form method="Post" action="CreateNhanVien" enctype="multipart/form-data">
-				<label for="id">Mã nhân viên:</label><br> <input type="text" name="id"><br> 
-				<label for="name">Tên nhân viên:</label><br> <input type="text" name="name"><br> 
-				<label for="bdate">Ngày sinh:</label><br> <input type="date" name="bdate"><br>
-				<label for="sex">Giới tính:</label><br> <input type="text" name="sex"><br>
-				<label for="address">Địa chỉ:</label><br> <input type="text" name="address"><br>
-				<label for="phone">Số điện thoại:</label><br> <input type="text" name="phone"><br>
-				<label for="pictureNV">Ảnh nhân thân:</label><br> 
+				<label for="id">Id:</label><br> <input type="text" name="id"><br> 
+				<label for="name">Name:</label><br> <input type="text" name="name"><br> 
+				<label for="bdate">Birthday:</label><br> <input type="date" name="bdate"><br>
+				<label for="sex">Sex:</label><br> <input type="text" name="sex"><br>
+				<label for="address">Address:</label><br> <input type="text" name="address"><br>
+				<label for="phone">Phone:</label><br> <input type="text" name="phone"><br>
+				<label for="pictureNV">Personal picture:</label><br> 
 				<input type="file" name="pictureNV" required> 
-				<input type="submit" value="Thêm nhân viên">
+				<input type="submit" value="Add Employee">
 			</form>
 	</section>
 </body>

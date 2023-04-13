@@ -4,24 +4,26 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Quản lý bãi đỗ xe</title>
+<title>Edit parking fee information</title>
 <link rel="stylesheet" type="text/css" href="Css/StyleAdd.css">
+<link rel="icon" type="image/x-icon" href="https://github.com/Truong02022002/demojava/blob/master/src/main/webapp/img/favicon.PNG?raw=true">
 </head>
 <body>
 	<section>
-		<h1>Thay đổi thông tin giá đỗ xe</h1>
+		<h1>Edit parking fee information</h1>
 			<form action="EditGiaDoXe?id_cu=${gia.getId()}" method="post">
 			
-				<label for="name">Loại xe:</label> 
+				<label for="name">Types of vehicle:</label> 
 				<input type="text" id="name" name="name" value = "${gia.getName()}" > 
-				
-				<label for="time">Thời gian:</label>
+				<br>
+				<label for="time">Times:</label>
 				<input type="date" id="time" name="time" value = "${gia.getTime()}">
-				
-				<label for="price">Giá:</label> 
+				<br>
+				<br>
+				<label for="price">Fee:</label> 
 				<input type="number" id="price" name="price" value = "${gia.getPrice()}">
-				
-				<input type="submit" value="Sửa thông tin giá đỗ xe">
+				<br>
+				<input type="submit" value="Edit parking fee information">
 			</form>
 	</section>
 </body>

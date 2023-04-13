@@ -60,13 +60,13 @@ public class IndexGiaBaiDo extends HttpServlet {
 
 		} catch (ClassNotFoundException | SQLException e) {
 			// TODO Auto-generated catch block
-			Logger.getLogger(SignInServlet.class.getName()).log(Level.SEVERE, null, e);
+			Logger.getLogger(LogInServlet.class.getName()).log(Level.SEVERE, null, e);
 		} finally {
 			if (conn != null) {
 				try {
 					conn.close();
 				} catch (SQLException ex) {
-					Logger.getLogger(SignInServlet.class.getName()).log(Level.SEVERE, null, ex);
+					Logger.getLogger(LogInServlet.class.getName()).log(Level.SEVERE, null, ex);
 				}
 			}
 

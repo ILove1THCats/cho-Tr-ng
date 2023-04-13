@@ -5,25 +5,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Thêm phiếu đỗ xe</title>
+<title>Add new parking ticket</title>
 <link rel="stylesheet" type="text/css" href="Css/StyleAdd.css">
+<link rel="icon" type="image/x-icon" href="https://github.com/Truong02022002/demojava/blob/master/src/main/webapp/img/favicon.PNG?raw=true">
 </head>
 <body>
 	<section>
-		<h1>Thêm phiếu đỗ xe</h1>
+		<h1>Add new parking ticket</h1>
 			<form method="Post" action="CreatePhieuDoXe" >
-				<label for="id">Mã phiếu đỗ xe:</label><br> <input type="text" name="id"><br> 
-				<label for="id_car">Mã xe:</label><br>
+				<label for="id">Id parking ticket:</label><br> <input type="text" name="id"><br> 
+				<label for="id_car">Id Vehicle:</label><br>
 				<select id="id_car" name="id_car" required>
-					<option value = "">---Chon loại xe---</option>
+					<option value = "">---Select types of vehicle---</option>
 					<c:forEach var = "cr" items = "${create}">
 						<option value = "${cr.id}">${cr.id}</option>
 					</c:forEach>					
 				</select>
-				<label for="timeIn">Thời gian vào:</label><br> <input type="date" name="timeIn"><br>
-				<label for="timeOut">Thời gian ra:</label><br> <input type="date" name="timeOut"><br>
-				<label for="price">Số tiền:</label><br> <input type="text" name="price"><br>
-				<input type="submit" value="Thêm phiếu đỗ xe">
+				<br>
+				<label for="timeIn">Time in:</label><br> <input type="date" name="timeIn"><br>
+				<label for="timeOut">Time out:</label><br> <input type="date" name="timeOut"><br>
+				<label for="price">Total:</label><br> <input type="text" name="price"><br>
+				<input type="submit" value="Add new parking ticket">
 			</form>
 	</section>
 </body>
