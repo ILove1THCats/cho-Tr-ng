@@ -3,6 +3,10 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
   String user = (String)session.getAttribute("username");
+	if (user == null)
+	{
+		request.getRequestDispatcher("/LogIn.jsp").forward(request, response);
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -76,11 +80,10 @@
 			<table>
 				<thead>
 					<tr>
-						<th>ID</th>
+						<th>ID vehicle</th>
 						<th>Type of vehicle</th>
 						<th>License plate number</th>
-						<th>Color</th>
-						<th>Status</th>
+						<th>Image</th>
 						<th>Edit</th>
 						<th>Delete</th>
 					</tr>
@@ -91,9 +94,7 @@
 							<td>${l.id}</td>
 							<td>${l.loaixe}</td>
 							<td>${l.bienso}</td>
-							<td>${l.mausac}</td>
-							<td>${l.tinhtrang}</td>
-							<td><img src="${l.mausac}" style="width:200px"></td>
+							<td><img src="${l.hinhanh}" style="width:200px"></td>
 							<td><a href="EditXe?id=${l.id}&cal=${l.loaixe}"><i class="fa fa-edit"></i></a></td>
 							<td><a href="DeleteXe?id=${l.id}"><i class="fa fa-trash"></i></a></td>
 						</tr>

@@ -35,7 +35,7 @@ public class signOut extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.removeAttribute("username");
 		
-		request.getRequestDispatcher("LogIn.jsp").forward(request, response);
+		request.getRequestDispatcher("/LogIn.jsp").forward(request, response);
 	}
 
 	/**

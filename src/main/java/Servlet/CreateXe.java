@@ -1,5 +1,6 @@
 package Servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -9,14 +10,20 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  * Servlet implementation class CreateXe
  */
+@MultipartConfig(
+		 fileSizeThreshold = 1024 * 1024 * 10,
+		 maxFileSize = 1024 * 1024 * 50,
+		 maxRequestSize = 1024 * 1024 * 100)
 @WebServlet("/CreateXe")
 public class CreateXe extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -71,12 +78,16 @@ public class CreateXe extends HttpServlet {
 			String id = request.getParameter("id");
 			String catagory = request.getParameter("catagory");
 			String seanum = request.getParameter("seanum");
-			String color = request.getParameter("color");
-			String state = request.getParameter("state");
-			
-			xe nhanv = new xe(id, catagory, seanum, color, state);
+			String image = "";
+			Part filePart = request.getPart("imageX");
+			String filename = extractFilename(filePart);
+			filename = new File(filename).getName();
 
-			DBUtils.insertXe(conn, nhanv);
+			filePart.write("D:/Java_Nhóm 2 ngu/Demo_cuoiky/src/main/webapp/img/" + filename);
+			image = "img/" + filename;
+			xe x = new xe(id, catagory, seanum, image);
+
+			DBUtils.insertXe(conn, x);
 
 			String context = request.getContextPath();
 			response.sendRedirect(context + "/IndexXe");
@@ -94,6 +105,16 @@ public class CreateXe extends HttpServlet {
 			}
 
 		}
+	}
+
+	private String extractFilename(Part part) {
+		String partHeader = part.getHeader("content-disposition");
+		for(String content: partHeader.split(";")) {
+			if(content.trim().startsWith("filename")) {
+				return content.substring(content.indexOf('=') + 2, content.length() - 1);
+			}
+		}
+		return "";
 	}
 
 }

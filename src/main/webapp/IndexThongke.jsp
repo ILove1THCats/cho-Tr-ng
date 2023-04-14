@@ -2,6 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%
   String user = (String)session.getAttribute("username");
+	if (user == null)
+	{
+		request.getRequestDispatcher("/LogIn.jsp").forward(request, response);
+	}
 %>
 <!DOCTYPE html>
 <html>

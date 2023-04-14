@@ -12,8 +12,8 @@
 <body>
 	<section>
 		<h1>Edit vehicle information</h1>
-			<form action="EditXe?id_cu=${xe.getId()}" method="post">
-			
+			<form action="EditXe" method="post" enctype="multipart/form-data">
+				<input type="hidden" id="id" name="id" value = "${xe.getId()}"><br>
 				<label for="catagory">Type of vehicle:</label><br>
 				<select id="catagory" name="catagory" required>
 					<option value = "${cal}">${cal}</option>
@@ -27,13 +27,15 @@
 				<input type="text" id="seanum" name="seanum" value = "${xe.getBienso()}">
 				
 				
-				<label for="color">Color:</label> 
-				<input type="text" id="color" name="color" value = "${xe.getMausac()}">
-				
-				<label for="state">Status:</label> 
-				<input type="text" id="state" name="state" value = "${xe.getTinhtrang()}"> 
+				<label>Current profile image: </label>
+				<img alt="#" src="${xe.getHinhanh()}" width="80" height="60">
+				<br>
+				<br>
+				<label for="imageX">Profile image change: </label> 
+				<input type="file" id="imageX" name="imageX" value = "">
+				<br>
+				<br>
 				<input type="submit" value="Edit vehicle information">
 			</form>
 	</section>
-</body>
 </html>

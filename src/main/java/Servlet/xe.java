@@ -5,8 +5,7 @@ public class xe {
 	private String id;
 	private String loaixe;
 	private String bienso;
-	private String mausac;
-	private String tinhtrang;
+	private String hinhanh;
 	public xe() {
 		super();
 	}
@@ -14,13 +13,13 @@ public class xe {
 		super();
 		this.id = id;
 	}
-	public xe(String id, String loaixe, String bienso, String mausac, String tinhtrang) {
+
+	public xe(String id, String loaixe, String bienso, String hinhanh) {
 		super();
 		this.id = id;
 		this.loaixe = loaixe;
 		this.bienso = bienso;
-		this.mausac = mausac;
-		this.tinhtrang = tinhtrang;
+		this.hinhanh = hinhanh;
 	}
 	public String getId() {
 		return id;
@@ -40,18 +39,11 @@ public class xe {
 	public void setBienso(String bienso) {
 		this.bienso = bienso;
 	}
-	public String getMausac() {
-		return mausac;
+	public String getHinhanh() {
+		return hinhanh;
 	}
-	public void setMausac(String mausac) {
-		this.mausac = mausac;
+	public void setHinhanh(String hinhanh) {
+		this.hinhanh = hinhanh;
 	}
-	public String getTinhtrang() {
-		return tinhtrang;
-	}
-	public void setTinhtrang(String tinhtrang) {
-		this.tinhtrang = tinhtrang;
-	}
-	
 
 }

@@ -52,15 +52,14 @@ public class DBUtils {
 	}
 	
 	public static void insertXe(Connection conn, xe x) throws SQLException {
-		String sql = "insert into xe(id, loai_xe, bien_so, mau_sac, tinh_trang) values (?,?,?,?,?)";
+		String sql = "insert into xe(id, loai_xe, bien_so, hinh_anh) values (?,?,?,?)";
 
 		PreparedStatement pstm = conn.prepareStatement(sql);
 
 		pstm.setString(1, x.getId());
 		pstm.setString(2, x.getLoaixe());
 		pstm.setString(3, x.getBienso());
-		pstm.setString(4, x.getMausac());
-		pstm.setString(5, x.getTinhtrang());
+		pstm.setString(4, x.getHinhanh());
 
 		pstm.executeUpdate();
 	}
@@ -158,14 +157,12 @@ public class DBUtils {
 			String iden = rs.getString("id");
 			String catagory = rs.getString("loai_xe");
 			String seanum = rs.getString("bien_so");
-			String color = rs.getString("mau_sac");
-			String state = rs.getString("tinh_trang");
+			String pic = rs.getString("hinh_anh");
 			
 			x.setId(iden);
 			x.setLoaixe(catagory);
 			x.setBienso(seanum);
-			x.setMausac(color);
-			x.setTinhtrang(state);
+			x.setHinhanh(pic);
 
 			return x;
 		}
@@ -230,16 +227,15 @@ public class DBUtils {
 	}
 	
 	public static void EditXe(Connection conn, xe x) throws SQLException {
-		String sql = "update xe set loai_xe = ?, bien_so = ?, mau_sac = ?, tinh_trang = ?"
+		String sql = "update xe set loai_xe = ?, bien_so = ?, hinh_anh = ?"
 				+ "where id = ?";
 		
 		PreparedStatement pstm = conn.prepareStatement(sql);
 
 		pstm.setString(1, x.getLoaixe());
 		pstm.setString(2, x.getBienso());
-		pstm.setString(3, x.getMausac());
-		pstm.setString(4, x.getTinhtrang());
-		pstm.setString(5, x.getId());
+		pstm.setString(3, x.getHinhanh());
+		pstm.setString(4, x.getId());
 
 		pstm.executeUpdate();
 	}
@@ -370,18 +366,17 @@ public class DBUtils {
 		List<xe> X = new ArrayList<>();
 
 		while (rs.next()) {
-			String id = rs.getString("id");
-			String loaixe = rs.getString("loai_xe");
-			String seanum = rs.getString("bien_so");		
-			String color = rs.getString("mau_sac");	
-			String state = rs.getString("tinh_trang");	
-
+			
+			String iden = rs.getString("id");
+			String catagory = rs.getString("loai_xe");
+			String seanum = rs.getString("bien_so");
+			String pic = rs.getString("hinh_anh");
+			
 			xe x = new xe();
-			x.setId(id);
-			x.setLoaixe(loaixe);
+			x.setId(iden);
+			x.setLoaixe(catagory);
 			x.setBienso(seanum);
-			x.setMausac(color);
-			x.setTinhtrang(state);
+			x.setHinhanh(pic);
 			X.add(x);
 
 		}
@@ -551,19 +546,17 @@ public class DBUtils {
 		List<xe> X = new ArrayList<>();
 
 		while (rs.next()) {
-			String id = rs.getString("id");
-			String loaixe = rs.getString("loai_xe");
-			String seanum = rs.getString("bien_so");		
-			String color = rs.getString("mau_sac");	
-			String state = rs.getString("tinh_trang");	
-
-			xe xe = new xe();
-			xe.setId(id);
-			xe.setLoaixe(loaixe);
-			xe.setBienso(seanum);
-			xe.setMausac(color);
-			xe.setTinhtrang(state);
-			X.add(xe);
+			String iden = rs.getString("id");
+			String catagory = rs.getString("loai_xe");
+			String seanum = rs.getString("bien_so");
+			String pic = rs.getString("hinh_anh");
+			
+			xe x = new xe();
+			x.setId(iden);
+			x.setLoaixe(catagory);
+			x.setBienso(seanum);
+			x.setHinhanh(pic);
+			X.add(x);
 
 		}
 

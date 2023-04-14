@@ -6,6 +6,10 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%
   String user = (String)session.getAttribute("username");
+	if (user == null)
+	{
+		request.getRequestDispatcher("/LogIn.jsp").forward(request, response);
+	}
 %>
 <!DOCTYPE html>
 <html>
